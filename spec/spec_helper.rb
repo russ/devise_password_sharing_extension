@@ -1,12 +1,23 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+ENV["RAILS_ENV"] = "test"
+
+$:.unshift File.dirname(__FILE__)
+
+require 'rails_app/config/environment'
+require 'orm/active_record'
+require 'rails/test_help'
 require 'rspec'
-require 'devise_password_sharing_extension'
+require 'shoulda'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  
+  config.filter_run :focus => true
+  config.run_all_when_everything_filtered = true
+
+  config.before(:each) do
+    User.destroy_all
+    DevisePasswordSharingExtension::LoginEvent.destroy_all
+  end
 end
