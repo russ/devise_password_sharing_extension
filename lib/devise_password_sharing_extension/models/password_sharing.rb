@@ -1,3 +1,5 @@
+require 'devise_password_sharing_extension/hooks/password_sharing'
+
 module Devise
   module Models
     module PasswordSharing
@@ -34,6 +36,7 @@ module Devise
       end
 
       def password_sharing?
+        return true unless banned_for_password_sharing_at.nil?
         login_events.grouped_by_city(self.class.time_frame).any? do |g|
           g.count >= self.class.number_of_cities
         end

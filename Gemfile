@@ -12,4 +12,6 @@ group :development do
   gem "jeweler", "~> 1.6.4"
   gem "rcov", ">= 0"
   gem "shoulda", "~> 2.11.3"
+  gem "capybara", "~> 1.1.1"
+  gem "launchy"
 end
