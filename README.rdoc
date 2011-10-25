@@ -1,6 +1,20 @@
 = devise_password_sharing_extension
 
-Description goes here.
+  script/rails g devise_password_sharing_extension:install
+  script/rails g devise_password_sharing_extension User
+
+White listed ip addresses are listed in:
+
+  config/white_listed_ips.yml
+
+Config is in the devise initializer:
+
+  enable_banning # Log login events but do not ban users.
+  geoip_database # GeoIP databse. Still looking for a sample database.
+  time_frame # The amount of time a password is allowed to be shared.
+  number_of_cities # Number of cities a password is allowed to be used in.
+
+General logic is that when a user logs in over X number of cities in Y number of hours, the user gets a ban.
 
 == Contributing to devise_password_sharing_extension
 
