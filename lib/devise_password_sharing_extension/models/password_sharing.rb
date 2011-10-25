@@ -22,15 +22,15 @@ module Devise
       def create_login_event!(request)
         unless @@white_listed_ips.include?(request.remote_ip)
           database = GeoIP.new(self.class.geoip_database)
-          geo = database.city(request.remote_ip)
-
-          login_events.create!(
-            :ip_address => request.remote_ip,
-            :latitude => geo.latitude,
-            :longitude => geo.longitude,
-            :city => geo.city_name,
-            :country_code => geo.country_code2,
-            :region_name => geo.region_name)
+          if geo = database.city(request.remote_ip)
+            login_events.create!(
+              :ip_address => request.remote_ip,
+              :latitude => geo.latitude,
+              :longitude => geo.longitude,
+              :city => geo.city_name,
+              :country_code => geo.country_code2,
+              :region_name => geo.region_name)
+          end
         end
       end
 
