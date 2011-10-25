@@ -14,7 +14,7 @@ module Devise
       end
 
       included do
-        has_many :login_events, :class_name => 'DevisePasswordSharingExtension::LoginEvent'
+        has_many :login_events
 
         @@white_listed_ips = YAML::load(File.read(Rails.root.join('config', 'white_listed_ips.yml')))
       end
