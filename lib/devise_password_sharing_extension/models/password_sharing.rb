@@ -43,7 +43,7 @@ module Devise
       def password_sharing?
         return true unless banned_for_password_sharing_at.nil?
         login_events.grouped_by_city(self.class.time_frame).any? do |g|
-          g.count.to_i >= self.class.number_of_cities
+          g.count.to_i >= self.class.number_of_cities.to_i
         end
       end
     end
