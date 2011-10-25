@@ -6,6 +6,7 @@ module Devise
       extend ActiveSupport::Concern
 
       module ClassMethods
+        Devise::Models.config(self, :enable_banning)
         Devise::Models.config(self, :geoip_database)
         Devise::Models.config(self, :time_frame)
         Devise::Models.config(self, :number_of_cities)
@@ -34,6 +35,7 @@ module Devise
       end
 
       def ban_for_password_sharing!
+        return unless self.class.enable_banning
         self.banned_for_password_sharing_at = Time.now
         save(:validate => false)
       end

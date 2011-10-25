@@ -15,9 +15,19 @@ describe Devise::Models::PasswordSharing do
   end
 
   describe "#ban_for_password_sharing!" do
-    it "sets :banned_for_password_sharing_at to the current time" do
-      subject.ban_for_password_sharing!
-      subject.banned_for_password_sharing_at.should_not be_nil
+    context "when banning is enabled" do
+      it "sets :banned_for_password_sharing_at to the current time" do
+        subject.ban_for_password_sharing!
+        subject.banned_for_password_sharing_at.should_not be_nil
+      end
+    end
+
+    context "when banning is not enabled" do
+      it "does not ban user" do
+        User.enable_banning = false
+        subject.ban_for_password_sharing!
+        subject.banned_for_password_sharing_at.should be_nil
+      end
     end
   end
 

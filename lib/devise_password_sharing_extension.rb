@@ -4,6 +4,9 @@ require 'devise_password_sharing_extension/schema'
 require 'devise_password_sharing_extension/rails'
 
 module Devise
+  mattr_accessor :enable_banning
+  @@enable_banning = true
+
   mattr_accessor :geoip_database
   @@geoip_database = '/var/tmp/geoip.dat'
 
