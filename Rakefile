@@ -10,8 +10,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "devise_password_sharing_extension"
   gem.homepage = "http://github.com/russ/devise_password_sharing_extension"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Devise extension to curb password sharing.}
+  gem.description = %Q{Devise extension to curb password sharing.}
   gem.email = "russ@bashme.org"
   gem.authors = ["Russ Smith"]
   # dependencies defined in Gemfile
