@@ -20,6 +20,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     User.destroy_all
-    DevisePasswordSharingExtension::LoginEvent.destroy_all
+    LoginEvent.destroy_all
   end
 end

@@ -10,7 +10,7 @@ describe Devise::Models::PasswordSharing do
       lambda {
         mock_geo_database
         subject.create_login_event!(request_fixture)
-      }.should change(DevisePasswordSharingExtension::LoginEvent, :count).by(1)
+      }.should change(LoginEvent, :count).by(1)
     end
   end
 
