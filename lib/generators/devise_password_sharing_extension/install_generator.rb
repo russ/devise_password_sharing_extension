@@ -15,7 +15,7 @@ module DevisePasswordSharingExtension
       end
 
       def copy_white_listed_ips
-        migration_template("white_listed_ips.yml", "config/white_listed_ips.yml")
+        copy_file("white_listed_ips.yml", "config/white_listed_ips.yml")
       end
     end
   end
