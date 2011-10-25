@@ -9,14 +9,17 @@ module Devise
         Devise::Models.config(self, :geoip_database)
         Devise::Models.config(self, :time_frame)
         Devise::Models.config(self, :number_of_cities)
+        Devise::Models.config(self, :white_listed_ips)
       end
 
       included do
         has_many :login_events, :class_name => 'DevisePasswordSharingExtension::LoginEvent'
+
+        @@white_listed_ips = YAML::load(File.read(Rails.root.join('config', 'white_listed_ips.yml')))
       end
 
       def create_login_event!(request)
-        unless request.remote_ip == '127.0.0.1'
+        unless @@white_listed_ips.include?(request.remote_ip)
           database = GeoIP.new(self.class.geoip_database)
           geo = database.city(request.remote_ip)
 

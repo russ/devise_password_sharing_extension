@@ -2,7 +2,7 @@ module DevisePasswordSharingExtension
   module Generators # :nodoc:
     # Install Generator
     class InstallGenerator < Rails::Generators::Base
-      source_root File.expand_path("../../templates", __FILE__)
+      source_root File.expand_path("../templates", __FILE__)
 
       desc "Install the devise security extension"
 
@@ -12,6 +12,10 @@ module DevisePasswordSharingExtension
         "  # config.sharing_time_frame = 2.hour\n" +
         "  # config.number_of_cities = 10\n" +
         "\n", :before => /end[ |\n|]+\Z/
+      end
+
+      def copy_white_listed_ips
+        migration_template("white_listed_ips.yml", "config/white_listed_ips.yml")
       end
     end
   end
