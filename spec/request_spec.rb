@@ -40,7 +40,7 @@ describe 'Request Integration', :type => :request do
 
     describe 'when ban for password sharing is on' do
       it 'denies access' do
-        sign_in_as_user(create_user(:banned_for_password_sharing => true))
+        sign_in_as_user(create_user(:banned_for_password_sharing_at => Time.now))
         visit('/secure')
         page.should have_content('secure')
       end

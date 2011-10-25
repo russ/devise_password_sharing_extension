@@ -1,7 +1,7 @@
 class DevisePasswordSharingAddTo<%= table_name.camelize %> < ActiveRecord::Migration
   def self.up
     change_table :<%= table_name %> do |t|
-      t.datetime :banned_for_password_sharing, :default => false
+      t.datetime :banned_for_password_sharing_at, :default => nil
     end
 
     create_table :login_events do |t|
@@ -18,7 +18,7 @@ class DevisePasswordSharingAddTo<%= table_name.camelize %> < ActiveRecord::Migra
 
   def self.down
     change_table :<%= table_name %> do |t|
-      t.remove :banned_for_password_sharing
+      t.remove :banned_for_password_sharing_at
     end
 
     drop_table :login_events

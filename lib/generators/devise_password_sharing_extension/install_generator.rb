@@ -10,7 +10,7 @@ module DevisePasswordSharingExtension
         inject_into_file "config/initializers/devise.rb", "\n  # ==> Password Sharing Extension\n" +
         "  # config.enable_banning = true\n" +
         "  # config.geoip_database = '/var/tmp/geoip.dat'\n" +
-        "  # config.sharing_time_frame = 2.hour\n" +
+        "  # config.time_frame = 2.hour\n" +
         "  # config.number_of_cities = 10\n" +
         "\n", :before => /end[ |\n|]+\Z/
       end
