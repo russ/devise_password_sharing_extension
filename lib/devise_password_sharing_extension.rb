@@ -8,10 +8,10 @@ module Devise
   @@geoip_database = '/var/tmp/geoip.dat'
 
   mattr_accessor :time_frame
-  @@time_frame = 1.hour
+  @@time_frame = 2.hour
 
   mattr_accessor :number_of_cities
-  @@number_of_cities = 2
+  @@number_of_cities = 10
 end
 
 Devise.add_module(:password_sharing, :model => 'devise_password_sharing_extension/models/password_sharing')
