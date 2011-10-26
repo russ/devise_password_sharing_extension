@@ -23,13 +23,18 @@ module Devise
         unless @@white_listed_ips.include?(request.remote_ip)
           database = GeoIP.new(self.class.geoip_database)
           if geo = database.city(request.remote_ip)
-            login_events.create!(
-              :ip_address => request.remote_ip,
-              :latitude => geo.latitude,
-              :longitude => geo.longitude,
-              :city => geo.city_name,
-              :country_code => geo.country_code2,
-              :region_name => geo.region_name)
+            begin
+              login_events.create!(
+                :ip_address => request.remote_ip,
+                :latitude => geo.latitude,
+                :longitude => geo.longitude,
+                :city => geo.city_name,
+                :country_code => geo.country_code2,
+                :region_name => geo.region_name)
+            rescue ActiveRecord::RecordInvalid => e
+              # Just move on and be nice.
+              Rails.logger.info("Problem with geo: #{geo.inspect}")
+            end
           end
         end
       end
