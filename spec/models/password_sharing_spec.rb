@@ -34,8 +34,9 @@ describe Devise::Models::PasswordSharing do
   describe "#password_sharing?" do
     context "when there is password sharing" do
       before do
-        10.times do
-          mock_geo_database(:city => 'Las Vegas')
+        User.number_of_cities = 2
+        ['Las Vegas', 'Los Angeles', 'San Diego'].each do |city|
+          mock_geo_database(:city => city)
           subject.create_login_event!(request_fixture)
         end
       end

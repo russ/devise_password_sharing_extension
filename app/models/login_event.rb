@@ -7,9 +7,8 @@ class LoginEvent < ActiveRecord::Base
   attr_accessible :ip_address, :latitude, :longitude
   attr_accessible :city, :country_code, :region_name
 
-  def self.grouped_by_city(time_frame = 1.hour)
-    select('COUNT(*) AS count, login_events.city').
-    where('login_events.created_at >= ?', Time.now - time_frame).
-    group('login_events.city')
+  def self.cities_in_the_last(time_frame = 2.hours)
+    select('DISTINCT login_events.city').
+    where('login_events.created_at >= ?', time_frame.ago)
   end
 end
