@@ -28,9 +28,9 @@ module Devise
                 :ip_address => request.remote_ip,
                 :latitude => geo.latitude,
                 :longitude => geo.longitude,
-                :city => geo.city_name,
-                :country_code => geo.country_code2,
-                :region_name => geo.region_name)
+                :city => geo.city_name.encode('US-ASCII', :undef => :replace),
+                :country_code => geo.country_code2.encode('US-ASCII', :undef => :replace),
+                :region_name => geo.region_name.encode('US-ASCII', :undef => :replace))
             rescue ActiveRecord::RecordInvalid => e
               # Just move on and be nice.
               Rails.logger.info("Problem with geo: #{geo.inspect}")
