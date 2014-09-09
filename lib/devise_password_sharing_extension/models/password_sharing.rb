@@ -7,6 +7,7 @@ module Devise
 
       module ClassMethods
         Devise::Models.config(self, :enable_banning)
+        Devise::Models.config(self, :banning_handler)
         Devise::Models.config(self, :geoip_database)
         Devise::Models.config(self, :time_frame)
         Devise::Models.config(self, :number_of_cities)
@@ -19,18 +20,18 @@ module Devise
         @@white_listed_ips = YAML::load(File.read(Rails.root.join('config', 'white_listed_ips.yml')))
       end
 
-      def create_login_event!(request)
-        unless @@white_listed_ips.include?(request.remote_ip)
+      def create_login_event!(remote_ip)
+        unless @@white_listed_ips.include?(remote_ip)
           database = GeoIP.new(self.class.geoip_database)
-          if geo = database.city(request.remote_ip)
+          if geo = database.city(remote_ip)
             begin
               login_events.create!(
-                :ip_address => request.remote_ip,
-                :latitude => geo.latitude,
-                :longitude => geo.longitude,
-                :city => geo.city_name.encode('US-ASCII', :undef => :replace),
-                :country_code => geo.country_code2.encode('US-ASCII', :undef => :replace),
-                :region_name => geo.region_name.encode('US-ASCII', :undef => :replace))
+                ip_address: remote_ip,
+                latitude: geo.latitude,
+                longitude: geo.longitude,
+                city: geo.city_name.encode('US-ASCII', undef: :replace),
+                country_code: geo.country_code2.encode('US-ASCII', undef: :replace),
+                region_name: geo.region_name.encode('US-ASCII', undef: :replace))
             rescue ActiveRecord::RecordInvalid => e
               # Just move on and be nice.
               Rails.logger.info("Problem with geo: #{geo.inspect}")
@@ -42,7 +43,7 @@ module Devise
       def ban_for_password_sharing!
         return unless self.class.enable_banning
         self.banned_for_password_sharing_at = Time.now
-        save(:validate => false)
+        save(validate: false)
       end
 
       def password_sharing?
