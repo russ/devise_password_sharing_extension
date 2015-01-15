@@ -1,5 +1,5 @@
 class LoginEvent < ActiveRecord::Base
-  set_table_name 'login_events'
+  self.table_name = 'login_events'
 
   validates_presence_of :ip_address
 
