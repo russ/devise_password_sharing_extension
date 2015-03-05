@@ -1,7 +1,9 @@
 ENV["RAILS_ENV"] = "test"
+ENV['BUNDLE_GEMFILE'] = File.join(File.dirname(__FILE__), '..', 'Gemfile')
 
 $:.unshift File.dirname(__FILE__)
 
+require 'sqlite3'
 require 'rails_app/config/environment'
 require 'orm/active_record'
 require 'rails/test_help'
