@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     devise_password_sharing_extension (0.0.15)
-      devise (>= 2.0.0)
+      devise (>= 3.0.0)
       geoip (~> 1.2.0)
-      rails (>= 3.0.0)
+      rails (>= 4.0.0)
 
 GEM
   remote: https://rubygems.org/

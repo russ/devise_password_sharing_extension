@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "launchy"
 
   {
-    'rails'  => '>= 3.0.0',
-    'devise' => '>= 2.0.0',
+    'rails'  => '>= 4.0.0',
+    'devise' => '>= 3.0.0',
     'geoip' => '~> 1.2.0'
   }.each do |lib, version|
     s.add_runtime_dependency(lib, *version)
