@@ -18,6 +18,13 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 1.8.6'
   s.required_rubygems_version = '>= 1.3.6'
 
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'bson_ext', '~> 1.3'
+  s.add_development_dependency "rspec", "~> 2.3.0"
+  s.add_development_dependency "shoulda", "~> 2.11.3"
+  s.add_development_dependency "capybara", "1.1.4"
+  s.add_development_dependency "launchy"
+
   {
     'rails'  => '>= 3.0.0',
     'devise' => '>= 2.0.0',
