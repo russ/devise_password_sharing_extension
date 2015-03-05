@@ -1,3 +1,5 @@
+require "devise/version"
+
 if Devise::VERSION < "2.1"
   module DevisePasswordSharingExtension
     module Schema
