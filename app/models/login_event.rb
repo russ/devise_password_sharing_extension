@@ -1,7 +1,7 @@
 class LoginEvent < ActiveRecord::Base
   self.table_name = 'login_events'
 
-  validates_presence_of :ip_address
+  validates :ip_address, presence: true
 
   attr_accessible :ip_address, :latitude, :longitude
   attr_accessible :city, :country_code, :region_name
