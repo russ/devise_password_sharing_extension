@@ -21,8 +21,7 @@ Gem::Specification.new do |s|
   {
     'rails'  => '>= 4.0.0',
     'devise' => '>= 3.0.0',
-    'geoip' => '~> 1.2.0',
-    'protected_attributes' => '~> 1.0.0'
+    'geoip' => '~> 1.2.0'
   }.each do |lib, version|
     s.add_runtime_dependency(lib, *version)
   end

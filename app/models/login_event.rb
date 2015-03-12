@@ -3,8 +3,8 @@ class LoginEvent < ActiveRecord::Base
 
   validates :ip_address, presence: true
 
-  attr_accessible :ip_address, :latitude, :longitude
-  attr_accessible :city, :country_code, :region_name
+  # attr_accessible :ip_address, :latitude, :longitude
+  # attr_accessible :city, :country_code, :region_name
 
   def self.cities_in_the_last(time_frame = 2.hours)
     select('DISTINCT login_events.city').

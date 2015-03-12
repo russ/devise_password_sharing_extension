@@ -25,13 +25,14 @@ module Devise
           database = GeoIP.new(self.class.geoip_database)
           if geo = database.city(remote_ip)
             begin
-              login_events.create!(
-                ip_address: remote_ip,
-                latitude: geo.latitude,
-                longitude: geo.longitude,
-                city: geo.city_name.encode('US-ASCII', undef: :replace),
-                country_code: geo.country_code2.encode('US-ASCII', undef: :replace),
-                region_name: geo.region_name.encode('US-ASCII', undef: :replace))
+              evt = login_events.build
+              evt.ip_address = remote_ip
+              evt.latitude = geo.latitude
+              evt.longitude = geo.longitude
+              evt.city = geo.city_name.encode('US-ASCII', undef: :replace)
+              evt.country_code = geo.country_code2.encode('US-ASCII', undef: :replace)
+              evt.region_name = geo.region_name.encode('US-ASCII', undef: :replace)
+              evt.save!
             rescue ActiveRecord::RecordInvalid => e
               # Just move on and be nice.
               Rails.logger.info("Problem with geo: #{geo.inspect}")
